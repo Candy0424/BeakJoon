@@ -6,8 +6,6 @@ int num = 0;
 
 string str = (a * b * c).ToString();
 
-int[] arr = new int[10];
-
 for (int i = 0; i <= 9; i++)
 {
     for (int j = 0; j < str.Length; j++)
@@ -18,11 +16,6 @@ for (int i = 0; i <= 9; i++)
 
         }
     }
-    arr[i] = num;
+    Console.WriteLine(num);
     num = 0;
-}
-
-for (int i = 0; i < arr.Length; i++)
-{
-    Console.WriteLine(arr[i]);
 }
