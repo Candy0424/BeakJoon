@@ -10,16 +10,23 @@ namespace BeakJoon
     {
         static void Main(string[] args)
         {
-            int t = Convert.ToInt32(Console.ReadLine());
+            int t = 0;
+
+            double h = .0f;
+            double w = .0f;
+            double n = .0f;
+            double x = .0f;
+            double y = .0f;
+            t = Convert.ToInt32(Console.ReadLine());
             for (int i = 0; i < t; i++)
             {
                 string[] arr = Console.ReadLine().Split(' ');
-                double h = Convert.ToInt32(arr[0]);
-                double w = Convert.ToInt32(arr[1]);
-                double n = Convert.ToInt32(arr[2]);
+                h = Convert.ToInt32(arr[0]);
+                w = Convert.ToInt32(arr[1]);
+                n = Convert.ToInt32(arr[2]);
 
-                double x = Convert.ToInt32(Math.Ceiling(n / h));
-                double y = Convert.ToInt32(n % h);
+                x = Convert.ToInt32(Math.Ceiling(n / h));
+                y = Convert.ToInt32(n % h);
 
                 y = y == 0 ? h : y;
 
