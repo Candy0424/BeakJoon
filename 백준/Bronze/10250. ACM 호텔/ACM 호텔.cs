@@ -17,16 +17,16 @@ namespace BeakJoon
             double n = .0f;
             double x = .0f;
             double y = .0f;
-            t = Convert.ToInt32(Console.ReadLine());
+            t = int.Parse(Console.ReadLine());
             for (int i = 0; i < t; i++)
             {
                 string[] arr = Console.ReadLine().Split(' ');
-                h = Convert.ToInt32(arr[0]);
-                w = Convert.ToInt32(arr[1]);
-                n = Convert.ToInt32(arr[2]);
+                h = int.Parse(arr[0]);
+                w = int.Parse(arr[1]);
+                n = int.Parse(arr[2]);
 
-                x = Convert.ToInt32(Math.Ceiling(n / h));
-                y = Convert.ToInt32(n % h);
+                x = Math.Ceiling(n / h);
+                y = n % h;
 
                 y = y == 0 ? h : y;
 
