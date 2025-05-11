@@ -11,31 +11,25 @@ int main()
 
 	cin >> n;
 
-	int* arr = new int[n];
-
 	for (int i = 0; i < n; ++i)
+	{
+		int value;
+
+		cin >> value;
+
+		map[value]++;
+	}
+
+	cin >> m;
+	int* arr = new int[m];
+
+	for (int i = 0; i < m; ++i)
 	{
 		cin >> arr[i];
 	}
 
-	cin >> m;
-	int* arr2 = new int[m];
-
 	for (int i = 0; i < m; ++i)
 	{
-		int key;
-		cin >> key;
-		map.insert(pair<int, int>(key, 0));	
-		arr2[i] = key;
-	}
-
-	for (int i = 0; i < n; ++i)
-	{
-		map[arr[i]]++;
-	}
-
-	for (int i = 0; i < m; ++i)
-	{
-		cout << map[arr2[i]] << ' ';
+		cout << map[arr[i]] << ' ';
 	}
 }
