@@ -1,39 +1,39 @@
 #include <iostream>
-#include <vector>
+#include <queue>
 using namespace std;
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-
-	int n, k;
+	int n, k, num = 1;
 
 	cin >> n >> k;
 
-	vector<int> arr;
+	queue<int> q;
 
-	for (int i = 1; i <= n; i++)
+	for (int i = 1; i <= n; ++i)
 	{
-		arr.push_back(i);
+		q.push(i);
 	}
-	int cnt = k-1;
 	cout << '<';
-	while (true)
+	while (!q.empty())
 	{
-		if (arr.size() == 1)
+		if (num != k)
 		{
-			cout << arr[cnt] << ">\n";
-			break;
+			q.push(q.front());
+			q.pop();
+			num++;
 		}
+		else
+		{
+			if (q.size() == 1)
+				cout << q.front();
+			else
+				cout << q.front() << ", ";
 
-		cout << arr[cnt] << ", ";
-		arr.erase(arr.begin() + cnt);
-
-		cnt += k-1;
-
-		if (cnt >= arr.size() - 1)
-			cnt %= arr.size();
+			q.pop();
+			num = 1;
+		}
 	}
+
+	cout << '>';
 }
