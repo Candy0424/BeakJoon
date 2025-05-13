@@ -1,55 +1,3 @@
-//int main()
-//{
-//	string wBoard[] =
-//	{
-//		"WBWBWBWB",
-//		"BWBWBWBW",
-//		"WBWBWBWB",
-//		"BWBWBWBW",
-//		"WBWBWBWB",
-//		"BWBWBWBW",
-//		"WBWBWBWB",
-//		"BWBWBWBW",
-//	};
-//
-//	string bBoard[] =
-//	{
-//		"BWBWBWBW",
-//		"WBWBWBWB",
-//		"BWBWBWBW",
-//		"WBWBWBWB",
-//		"BWBWBWBW",
-//		"WBWBWBWB",
-//		"BWBWBWBW",
-//		"WBWBWBWB",
-//	};
-//
-//	int n, m;
-//
-//	cin >> n >> m;
-//
-//	vector<vector<char>> arr(n, vector<char>(m));
-//
-//	for (int y = 0; y < n; ++y)
-//	{
-//		for (int x = 0; x < m; ++x)
-//		{
-//			cin >> arr[y][x];
-//		}
-//	}
-//
-//	for (int y = 0; y < n; ++y)
-//	{
-//		for (int x = 0; x < m; ++x)
-//		{
-//			cout << arr[y][x];
-//		}
-//		cout << endl;
-//	}
-//
-//
-//}
-
 #include <iostream>
 #include <string>
 #include <deque>
@@ -114,16 +62,33 @@ int main()
 
 		cout << '[';
 
-		while (!dq.empty())
+		if (isReverse)
 		{
-			if (dq.size() == 1)
+			while (!dq.empty())
 			{
-				cout << ( isReverse ? dq.back() : dq.front());
-				break;
+				if (dq.size() == 1)
+				{
+					cout << dq.back();
+					break;
+				}
+				cout << dq.back() << ',';
+				dq.pop_back();
 			}
-			cout << (isReverse ? dq.back() : dq.front()) << ',';
-			isReverse ? dq.pop_back() : dq.pop_front();
 		}
+		else
+		{
+			while (!dq.empty())
+			{
+				if (dq.size() == 1)
+				{
+					cout << dq.front();
+					break;
+				}
+				cout << dq.front() << ',';
+				dq.pop_front();
+			}
+		}
+
 		cout << "]\n";
 	}
 }
