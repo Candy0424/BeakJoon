@@ -30,23 +30,17 @@ int main()
     sort(v.begin(), v.end(), Compare);
     int minTime = v[0].second, minIdx = 0;
 
-    while (true)
+    for (int i = 0; i < v.size(); ++i)
     {
-        bool isFind = false;
-        for (int i = 0; i < v.size(); ++i)
+        if (curTime <= v[i].first && eV[i] == false)
         {
-            if (curTime <= v[i].first && eV[i] == false)
-            {
-                minTime = v[i].second;
-                eV[i] = true;
-                minIdx = i;
-                isFind = true;
-                cnt++;
-                curTime = minTime;
-                continue;
-            }
+            minTime = v[i].second;
+            eV[i] = true;
+            minIdx = i;
+            cnt++;
+            curTime = minTime;
+            continue;
         }
-        if (!isFind) break;
     }
 
     cout << cnt;
