@@ -1,35 +1,39 @@
 #include <iostream>
-#include <unordered_map>
-
+#include <vector>
+#include <algorithm>;
 using namespace std;
+
+void Serch(const vector<int>& v1, const vector<int>& v2);
 
 int main()
 {
-	unordered_map<int, int> map;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-	int n = 0, m;
-
-	cin >> n;
-
-	for (int i = 0; i < n; ++i)
+	int a;
+	cin >> a;
+	vector<int> v1(a);
+	for (int i = 0; i < a; ++i)
 	{
-		int value;
-
-		cin >> value;
-
-		map[value]++;
+		cin >> v1[i];
+	}
+	sort(v1.begin(), v1.end());
+	cin >> a;
+	vector<int> v2(a);
+	for (int i = 0; i < a; ++i)
+	{
+		cin >> v2[i];
 	}
 
-	cin >> m;
-	int* arr = new int[m];
+	Serch(v1, v2);
+}
 
-	for (int i = 0; i < m; ++i)
+void Serch(const vector<int>& v1, const vector<int>& v2)
+{
+	for (int i = 0; i < v2.size(); ++i)
 	{
-		cin >> arr[i];
-	}
-
-	for (int i = 0; i < m; ++i)
-	{
-		cout << map[arr[i]] << ' ';
+		int target = v2[i];
+		cout << upper_bound(v1.begin(), v1.end(), target) - lower_bound(v1.begin(), v1.end(), target) << ' ';
 	}
 }
