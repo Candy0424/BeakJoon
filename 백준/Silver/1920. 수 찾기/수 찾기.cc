@@ -1,113 +1,55 @@
 #include <iostream>
-
 #include <vector>
-
-#include <algorithm>
-
+#include <algorithm>;
 using namespace std;
 
+void binarySerch(vector<int>& v1, vector<int>& v2);
+
 int main()
-
 {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-	int n, m;
-
-	cin >> n;
-
-    vector<int> arr1(n);
-
-	for (int i = 0; i < n; ++i)
-
+	int a;
+	cin >> a;
+	vector<int> v1(a);
+	for (int i = 0; i < a; ++i)
 	{
-
-		cin >> arr1[i];
-
+		cin >> v1[i];
+	}
+	sort(v1.begin(), v1.end());
+	cin >> a;
+	vector<int> v2(a);
+	for (int i = 0; i < a; ++i)
+	{
+		cin >> v2[i];
 	}
 
-    
+	binarySerch(v1, v2);
+}
 
-	cin >> m;
-
-    vector<int> arr2(m);
-
-	for (int i = 0; i < m; ++i)
-
+void binarySerch(vector<int>& v1, vector<int>& v2)
+{
+	
+	for (int i = 0; i < v2.size(); ++i)
 	{
+		int left = 0, right = v1.size() - 1, mid;
+		while (left <= right)
+		{
+			mid = (left + right) / 2;
 
-		cin >> arr2[i];
-
+			if (v1[mid] == v2[i])
+			{
+				cout << 1 << '\n';
+				break;
+			}
+			else if (v1[mid] < v2[i])
+				left = mid + 1;
+			else if (v1[mid] > v2[i])
+				right = mid - 1;
+		}
+		if (left > right)
+			cout << '0' << '\n';
 	}
-
-	sort(arr1.begin(), arr1.end(), [](int a, int b) {return a < b; });
-
-	for (int i = 0; i < arr2.size(); ++i)
-
-	{
-
-		int mid, high = arr1.size()-1, low = 0;
-
-        if (arr1.size() == 1)
-
-            cout << ( arr1[0] == arr2[i] ? 1 : 0) << '\n';
-
-        else
-
-		    while (true)
-
-		    {
-
-		    	mid = (high + low) / 2;
-
-                
-
-		    	if (arr1[mid] == arr2[i])
-
-                {
-
-                   cout << 1 << '\n';
-
-			   	break;
-
-			    }
-
-                else if (low >= high)
-
-                {
-
-                    cout << 0 << '\n';
-
-                    break;
-
-                }
-
-			
-
-		    	if (arr1[mid] > arr2[i])
-
-			    {
-
-			    	high = mid - 1;
-
-                    if (high < 0)
-
-                        high = 0;
-
-			    }
-
-		    	else
-
-		    	{
-
-			    	low = mid + 1;
-
-                    if (low > arr1.size())
-
-                        low = arr1.size()-1;
-
-		    	}
-
-		    }
-
-    }
-
 }
