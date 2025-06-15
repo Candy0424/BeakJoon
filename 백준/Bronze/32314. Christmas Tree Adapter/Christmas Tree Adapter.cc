@@ -11,5 +11,5 @@ int main()
 
 	cin >> treeA >> w >> v;
 
-	cout << ((w / v) >= treeA);
+	cout << (v*treeA <= w);
 }
