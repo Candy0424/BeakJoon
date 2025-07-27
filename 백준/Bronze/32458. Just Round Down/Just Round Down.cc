@@ -7,7 +7,5 @@ int main()
     
     cin >> n;
     
-    int r = n;
-    
-    cout << r;
+    cout << ((int)n);
 }
