@@ -3,9 +3,10 @@ using namespace std;
 
 int main()
 {
-    int a, b;
+    long a, b, result = 0;
     
     cin >> a >> b;
     
-    cout << ((a+b)*(a-b));
+    result = (a+b)*(a-b);
+    cout << result;
 }
