@@ -1,18 +1,20 @@
 #include <iostream>
-#include <vector>
 #include <queue>
+#include <vector>
 #include <algorithm>
+
 using namespace std;
 
-void DFS(int start, vector<int>*& graph, vector<bool>& visited)
+void dfs(int& start, vector<int>*& graph, vector<bool>& visite)
 {
 	vector<int> nextNodes;
-	visited[start-1] = true;
-	cout << start << " ";
+	visite[start - 1] = true;
+	cout << start << ' ';
+
 	for (int i = 0; i < graph[start - 1].size(); ++i)
 	{
 		int next = graph[start - 1][i];
-		if (!visited[next-1])
+		if (!visite[next-1])
 		{
 			nextNodes.push_back(next);
 		}
@@ -23,49 +25,43 @@ void DFS(int start, vector<int>*& graph, vector<bool>& visited)
 		sort(nextNodes.begin(), nextNodes.end());
 		for (int i = 0; i < nextNodes.size(); ++i)
 		{
-			if (!visited[nextNodes[i] - 1])
-			{
-				DFS(nextNodes[i], graph, visited);
-			}
+			if (!visite[nextNodes[i] - 1])
+				dfs(nextNodes[i], graph, visite);
 		}
 	}
 }
-
-void BFS(int start, vector<int>*& graph, vector<bool>& visited)
+void bfs(int& start, vector<int>*& graph, vector<bool>& visite)
 {
 	queue<int> q;
 
 	q.push(start);
-	visited[start - 1] = true;
+	visite[start - 1] = true;
 
 	while (!q.empty())
 	{
 		vector<int> nextNodes;
 
-		int node = q.front();
+		int value = q.front();
+		cout << value << ' ';
 		q.pop();
-		cout << node << " ";
 
-		for (int i = 0; i < graph[node - 1].size(); ++i)
+		for (int i = 0; i < graph[value - 1].size(); ++i)
 		{
-			int next = graph[node - 1][i];
-
-			if (!visited[next - 1])
-			{
-				nextNodes.push_back(next);	
-			}
+			int next = graph[value - 1][i];
+			if (!visite[next - 1])
+				nextNodes.push_back(next);
 		}
 
 		if (!nextNodes.empty())
 		{
 			sort(nextNodes.begin(), nextNodes.end());
-
-			for (int i = 0 ; i < nextNodes.size(); ++i)
+			for (int i = 0; i < nextNodes.size(); ++i)
 			{
-				if (!visited[nextNodes[i] - 1])
+				int next = nextNodes[i];
+				if (!visite[next - 1])
 				{
-					q.push(nextNodes[i]);
-					visited[nextNodes[i] - 1] = true;
+					q.push(next);
+					visite[next - 1] = true;
 				}
 			}
 		}
@@ -74,29 +70,27 @@ void BFS(int start, vector<int>*& graph, vector<bool>& visited)
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
+	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
 
 	int n, m, v;
-
+	
 	cin >> n >> m >> v;
 
-	vector<bool> visited(n);
+	vector<bool> visite(n);
 	vector<int>* graph = new vector<int>[n];
 
 	for (int i = 0; i < m; ++i)
 	{
 		int node, next;
-
 		cin >> node >> next;
 		graph[node - 1].push_back(next);
 		graph[next - 1].push_back(node);
 	}
 
-
-	DFS(v, graph, visited);
-	visited = vector<bool>(n);
+	dfs(v, graph, visite);
 	cout << '\n';
-	BFS(v, graph, visited);
+	visite = vector<bool>(n);
+	bfs(v, graph, visite);
 }
