@@ -5,36 +5,27 @@
 
 using namespace std;
 
-void bfs(int& start, vector<int>*& graph, vector<bool>& visite, int& num)
+void dfs(int& start, vector<int>*& graph, vector<bool>& visite, int& num)
 {
-	queue<int> q;
-
-	q.push(start);
+	vector<int> nextNodes;
 	visite[start - 1] = true;
-	
-	while (!q.empty())
-	{
-		vector<int> nextNodes;
-		int node = q.front() - 1;
-		q.pop();
-		for (int i = 0; i < graph[node].size(); ++i)
-		{
-			int next = graph[node][i];
-			if (!visite[next - 1])
-				nextNodes.push_back(next);
-		}
 
-		if (!nextNodes.empty())
+	for (int i = 0; i < graph[start - 1].size(); ++i)
+	{
+		int next = graph[start - 1][i];
+		if (!visite[next - 1])
+			nextNodes.push_back(next);
+	}
+
+	if (!nextNodes.empty())
+	{
+		for (int i = 0; i < nextNodes.size(); ++i)
 		{
-			for (int i = 0; i < nextNodes.size(); ++i)
+			int next = nextNodes[i];
+			if (!visite[next - 1])
 			{
-				int next = nextNodes[i];
-				if (!visite[next - 1])
-				{
-					q.push(next);
-					visite[next - 1] = true;
-					num++;
-				}
+				num++;
+				dfs(next, graph, visite, num);
 			}
 		}
 	}
@@ -63,7 +54,7 @@ int main()
 	}
 
 	if (!graph->empty())
-		bfs(start, graph, visite, num);
+		dfs(start, graph, visite, num);
 
 	cout << num;
 }
