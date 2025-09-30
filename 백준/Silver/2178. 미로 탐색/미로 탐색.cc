@@ -8,6 +8,14 @@ using namespace std;
 vector<string> board;
 vector<vector<int>> visited;
 
+void InsertQueue(queue<pair<int, int>>& q, int& x, int& y, pair<int, int>& next)
+{
+	if (board[y][x] != '1' || visited[y][x] != 0) return;
+
+	q.push({ x, y });
+	visited[y][x] = visited[next.second][next.first] + 1;
+}
+
 void bfs(int x, int y)
 {
 	queue<pair<int, int>> q;
@@ -25,39 +33,16 @@ void bfs(int x, int y)
 		int dX = next.first;
 		int dY = next.second;
 
-		if (dX + 1 < board[0].size())
-		{
-			if (board[dY][dX + 1] == '1' && visited[dY][dX + 1] == 0)
-			{
-				visited[dY][dX + 1] = visited[next.second][next.first] + 1;
-				q.push({ dX + 1, dY });
-			}
-		}
-		if (dX - 1 >= 0)
-		{
-			if (board[dY][dX - 1] == '1' && visited[dY][dX - 1] == 0)
-			{
-				visited[dY][dX - 1] = visited[next.second][next.first] + 1;
-				q.push({ dX - 1, dY });
-			}
-		}
-		if (dY + 1 < board.size())
-		{
-			if (board[dY + 1][dX] == '1' && visited[dY + 1][dX] == 0)
-			{
-				visited[dY + 1][dX] = visited[next.second][next.first] + 1;
-				q.push({ dX, dY + 1 });
-			}
-		}
-		if (dY - 1 >= 0)
-		{
-			if (board[dY - 1][dX] == '1' && visited[dY - 1][dX] == 0)
-			{
-				visited[dY - 1][dX] = visited[next.second][next.first] + 1;
-				q.push({ dX, dY - 1 });
-			}
-		}
+		int xIdx[] = { 1, -1, 0, 0 };
+		int yIdx[] = { 0, 0, 1, -1 };
 
+		for (int i = 0; i < 4; ++i)
+		{
+			int nX = dX + xIdx[i];
+			int nY = dY + yIdx[i];
+			if (nX < 0 || nY < 0 || nX >= board[0].size() || nY >= board.size()) continue;
+			InsertQueue(q, nX, nY, next);
+		}
 	}
 }
 
