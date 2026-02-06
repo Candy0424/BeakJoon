@@ -1,4 +1,4 @@
-# [Gold V] LCS - 9251 
+# [Gold IV] LCS - 9251 
 
 [문제 링크](https://www.acmicpc.net/problem/9251) 
 
